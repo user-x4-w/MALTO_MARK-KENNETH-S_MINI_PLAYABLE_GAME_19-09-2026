@@ -1,0 +1,88 @@
+//mini playable game
+using System;
+
+namespace SimpleGame
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Player 1 coordinates
+            int player1X = 5;
+            int player1Y = 5;
+            
+            // Star coordinates
+            int x2 = 8;
+            int y2 = 2;
+            
+            int score = 0;
+            bool play = true;
+
+            while (play == true)
+            {
+                Console.Clear();
+                Console.WriteLine("Mini Game");
+                Console.WriteLine("Score: " + score);
+                Console.WriteLine();
+
+                // Simple text-based board drawing using loops
+                for (int y = 0; y < 10; y++)
+                {
+                    for (int x = 0; x < 15; x++)
+                    {
+                        if (y == player1Y && x == player1X)
+                        {
+                            Console.Write("@");
+                        }
+                        else if (y == y2 && x == x2)
+                        {
+                            Console.Write("*");
+                        }
+                        else
+                        {
+                            Console.Write(".");
+                        }
+                    }
+                    Console.WriteLine();
+                }
+
+                // Check if player gets the star
+                if (player1X == x2 && player1Y == y2)
+                {
+                    score = score + 1;
+                    
+                    Random r = new Random();
+                    x2 = r.Next(0, 15);
+                    y2 = r.Next(0, 10);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("Move (W = Up, S = Down, A = Left, D = Right, Q = Quit): ");
+                string move = Console.ReadLine();
+
+                if (move == "w" || move == "W")
+                {
+                    player1Y = player1Y - 1;
+                }
+                else if (move == "s" || move == "S")
+                {
+                    player1Y = player1Y + 1;
+                }
+                else if (move == "a" || move == "A")
+                {
+                    player1X = player1X - 1;
+                }
+                else if (move == "d" || move == "D")
+                {
+                    player1X = player1X + 1;
+                }
+                else if (move == "q" || move == "Q")
+                {
+                    play = false;
+                }
+            }
+
+            Console.WriteLine("Game Over!");
+        }
+    }
+}
